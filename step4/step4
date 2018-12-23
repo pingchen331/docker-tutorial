@@ -1,0 +1,46 @@
+# Step4：-p (--publish list)端口映射
+* 現在，我們已經可以把程式碼放進去container內了，接下來我們想在container內運行一個Flask服務，讓我們試試看吧。
+```
+    docker run -it --rm -v $(pwd)/code:/tmp/py_code python:3.7 /bin/bash
+```
+* 進入container 後安裝flask
+```
+    pip install flask==0.12
+```
+* container ip查詢
+```
+    ip a
+```
+* 運行程式碼
+```
+    python /tmp/py_code/app.py
+```
+* 在本機（虛擬機)內使用瀏覽器或curl工具連線`continer-ip:5000`
+* 如果想要開放外網連線呢？ 我們必須要用到iptables 進行轉址
+```
+    sudo iptables -t nat .......................... 指令實在太長了 很麻煩
+```
+# 所以 docker 提供我們一個簡單的參數 <-p>，我們可以用-p參數來做端口映射，省去前面麻煩的內容，專注於開發及部署。
+## 再一次重新開始吧！！
+```
+    docker run -it --rm -v $(pwd)/code:/tmp/py_code -p 5000:5000 python:3.7 /bin/bash 
+```
+* 進入container後
+```
+    pip install flask
+    python /tmp/py_code/app.py
+```
+* 直接從本機瀏覽器瀏覽`192.168.56.111:5000`
+* 這樣是不是簡單多了呢！！！
+* 其實< -p >這個參數，就是讓docker自動幫我們做iptables 的動作
+---
+# 補充 docker run 可以基於bash 或sh 進行多行指令：
+## 每次都要進入container再安裝flask太麻煩了，有沒有辦法可以在docker run 執行的時候順便安裝並開啟app.py呢？
+## 答案是：YES!
+### 試試下面的指令：
+```
+    docker run -it --rm -v $(pwd)/code:/tmp/py_code -p 5000:5000 python:3.7 /bin/bash -c 'pip install flask==0.12 && python /tmp/py_code/app.py'
+    #bash -c: 讓bash 後面的指令已字串讀入，並以&&做區隔
+#偷懶：
+./try.sh
+```

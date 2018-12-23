@@ -1,0 +1,19 @@
+# step3: 參數介紹：-v(--volume list)參數
+## 環境開好了，該怎麼把程式碼放進去呢？
+```
+    -v 參數可以把在本機的指定資料夾掛載到容器內，讓本機與容器資料同步，常常用來處理設定檔，程式碼…運行服務時需要的檔案及資料夾。
+```
+* 目標：
+** 將code資料夾掛載到container內/tpm位置，並改名為py_code
+** python開啟py_code資料夾內的hello.py並查看運行結果
+```
+docker run -it --rm -v $(pwd)/code:/tmp/py_code python:3.7 /bin/bash
+# 偷懶專用
+./step3.sh
+```
+
+# 執行hello.py，並查看運行結果：
+```
+python /tmp/py_code/hello.py
+```
+# 沒錯～～又是Hello-world

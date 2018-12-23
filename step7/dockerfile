@@ -1,0 +1,14 @@
+#基於IMAGE python:3.7
+FROM python:3.7
+#添加FLASK_VER為環境變數，並設置版本為0.12
+ENV FLASK_VER 0.12
+#更新apt套件庫、安裝Flask，版本由FLASK_VER讀入、安裝VIM
+RUN apt-get update -qq \
+    && pip install -q flask==$FLASK_VER \
+    && apt-get install vim -qqy
+#將./code複製到image的/tmp內，並重新命名為py_code
+COPY ./code /tmp/py_code
+#切換到預設工作目錄/tmp/py_code
+WORKDIR /tmp/py_code
+#預設container開啟後執行python ./app.py
+CMD python ./app.py

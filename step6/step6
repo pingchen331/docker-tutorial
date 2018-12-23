@@ -1,0 +1,33 @@
+# Step6：docker exec：連入已開啟的容器。
+### 現在我們有一個容器正在背景執行，如果我們想要連入進行操作，該怎麼做呢？
+### 這時候我們就需要用到`docker exec`這個指令了
+## 連入容器：
+```
+    docker exec -it flask_test /bin/bash
+```
+## 或是，直接讓容器執行指定命令：
+```
+    docker exec flask_test echo "HI"
+```
+# 其他
+# 針對“容器”的動作：
+## kill/stop：停止
+### docker kill/stop <container_id>/<container_name>
+```
+docker kill flask_test
+docker stop flask_test
+```
+### 區別：stop 會按照程序停止；kill 會強制停止
+## start/restart：開啟
+### docker start/restart <container_id>/<container_name>
+### 兩個都是開啟的意思，通用
+```
+docker start flask_test
+docker restart flask_test
+```
+## rm：刪除
+### 完全刪除容器（容器內的資料不會被保留！！）有需要留存的資料須先放到-v所mapping的資料夾內
+### docker rm <container_id>/<container_name>
+```
+docker rm flask_test
+```

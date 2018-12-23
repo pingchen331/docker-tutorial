@@ -1,0 +1,13 @@
+# step5 docker run 其他參數：
+## -d, --detach：前面我們已經可以用一個指令安裝Flask並執行app.py了，如果我們不想上她佔用我們的畫面的話，我們可以用-d讓他在背景執行。
+```
+docker run -dit --rm -v $(pwd)/code:/tmp/py_code -p 5000:5000 python:3.7 /bin/bash -c 'pip install flask==0.12 && python /tmp/py_code/app.py'
+#偷懶：
+./detach.sh
+```
+## --name：當我們有很多個container 時可以針對個別container進行命名，這樣就不用每次都要查`container_id`了
+```
+docker run -dit --rm --name flask_test -v $(pwd)/code:/tmp/py_code -p 5000:5000 python:3.7 /bin/bash -c 'pip install flask==0.12 && python /tmp/py_code/app.py'
+#偷懶：
+./name.sh
+```

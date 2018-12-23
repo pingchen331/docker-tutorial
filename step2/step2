@@ -1,0 +1,12 @@
+# 試想：我們今天需要一個python3.7的測試環境，但是本機只有python2.7，你可以怎麼做？
+# (A)升級本機的python環境→可能導致很多與python相依的服務(例如yum…等)錯誤，修改設定麻煩。
+# (B)用pipenv創立虛擬環境→設定繁瑣，還是很麻煩。
+# (C)直接用Docker開一個Container，測試完畢後關閉並刪除→開啟方便快速，用完即刪，選我選我。
+# 現在，讓我們來嘗試一下
+# 用docker快速開啟一個python3.7的環境
+```
+docker run -it --rm python:3.7 /bin/bash
+#謎之音：docker 我需要一個python3.7的環境，我需要交互模式進行互動(-it)，用完即丟(--rm)，環境開啟之後進到/bin/bash。
+#再次提供偷懶腳本
+./step2.sh
+```

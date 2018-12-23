@@ -1,0 +1,13 @@
+version: '3'
+services:
+  flask:
+    build:
+      context: ./dockerfile
+      dockerfile: dockerfile-flask
+    container_name: flask
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./code:/tmp/py_code
+    command: python /tmp/py_code/app.py

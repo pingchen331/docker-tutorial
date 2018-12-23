@@ -1,0 +1,9 @@
+#指定IMAGE
+FROM jupyter/base-notebook
+#使用pip 套件庫更新pip 並安裝flask 0.12 requests
+RUN pip install --upgrade pip \
+ && pip install flask==0.12 requests
+#指定預設工作目錄/home/jovyan/work
+WORKDIR /home/jovyan/work
+#開啟notebook並設定token為空
+CMD start-notebook.sh --NotebookApp.token=''
