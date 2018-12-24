@@ -1,0 +1,15 @@
+version: '3'
+services:
+  flask:
+    image: ping331/flask_test:0.1
+    container_name: flask
+    restart: always
+    ports:
+      - "5000:5000"
+  ngrok:
+    image: wernight/ngrok
+    container_name: ngrok
+    ports:
+     - "4040:4040"
+    restart: always
+    command: ngrok http flask:5000
